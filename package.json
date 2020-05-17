@@ -18,6 +18,7 @@
     "graphql-date": "^1.0.3",
     "mongoose": "^5.9.14",
     "ts-node": "^8.10.1",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.2",
+    "nodemon": "^1.19.4"
   }
 }
