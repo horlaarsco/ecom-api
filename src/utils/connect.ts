@@ -10,7 +10,7 @@ mongoose
     useCreateIndex: true,
   })
   .then(() => {
-    return console.log(`Successfully connected to database`);
+    return console.log(`Successfully  connected to database`);
   })
   .catch((error) => {
     console.log("Error connecting to database: ", error);
