@@ -1,0 +1,22 @@
+{
+  "name": "ecom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon --exec  ts-node ./src/app.ts",
+    "start": "nodemon ./dist/app.js",
+    "prod": "npm run build && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.13.1",
+    "graphql-date": "^1.0.3",
+    "mongoose": "^5.9.14",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.2"
+  }
+}
