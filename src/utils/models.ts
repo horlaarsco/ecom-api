@@ -20,13 +20,13 @@ export const typeDefs = gql`
   }
 
   input UserInput {
-    firstName: String!
-    lastName: String!
-    username: String!
-    email: String!
-    password: String!
-    verified: Boolean!
-    role: String!
+    firstName: String
+    lastName: String
+    username: String
+    email: String
+    password: String
+    verified: Boolean
+    role: String
   }
 
   type Query {
@@ -36,6 +36,8 @@ export const typeDefs = gql`
 
   type Mutation {
     addUser(input: UserInput): User!
+    editUser(input: UserInput, id: ID!): User!
+    deleteUser(id: ID!): User!
   }
 `;
 
@@ -58,6 +60,16 @@ export const resolvers = {
         createdAt: 277272,
         updatedAt: 2882,
       });
+      return user;
+    },
+    editUser: async (_, { id, input }) => {
+      let user = await UserModel.findByIdAndUpdate(id);
+      user.username = input.username;
+      user.save();
+      return user;
+    },
+    deleteUser: async (_, { id }) => {
+      const user = await UserModel.findByIdAndDelete(id);
       return user;
     },
   },
