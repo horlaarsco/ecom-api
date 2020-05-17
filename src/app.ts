@@ -4,7 +4,7 @@ import { typeDefs, resolvers } from "./utils/models";
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-server.listen().then(({ url }) => {
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   db.on;
   console.log(`Server ready at ${url}`);
 });

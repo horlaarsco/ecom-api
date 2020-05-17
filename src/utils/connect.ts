@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+require("dotenv").config();
 
-const url = "mongodb://127.0.0.1:27017/ecom";
+const url = process.env.MONGO;
 
 mongoose
   .connect(url, {
