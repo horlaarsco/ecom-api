@@ -5,9 +5,10 @@
   "main": "app.js",
   "scripts": {
     "build": "tsc",
-    "heroku-postbuild": "nodemon --exec  ts-node ./src/app.ts",
+    "dev": "nodemon --exec  ts-node ./src/app.ts",
     "start": "nodemon ./dist/app.js",
-    "prod": "npm run build && npm run start"
+    "prod": "npm run build && npm run start",
+    "heroku-postbuild": "nodemon ./dist/app.js"
   },
   "keywords": [],
   "author": "",
