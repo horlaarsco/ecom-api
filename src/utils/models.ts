@@ -54,7 +54,6 @@ export const resolvers = {
   },
   Mutation: {
     addUser: async (_, { input }) => {
-      console.log(Date.now());
       const user = await UserModel.create({
         ...input,
         createdAt: 277272,
