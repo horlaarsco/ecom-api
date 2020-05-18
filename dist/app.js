@@ -16,6 +16,7 @@ var server = new apollo_server_express_1.ApolloServer({
 // @ts-ignore
 server.applyMiddleware({ app: app });
 var PORT = process.env.PORT;
+app.get("/", function (req, res) { return res.send("ola"); });
 app.listen(PORT, function () {
     return console.log("\uD83D\uDE80 Server ready at http://localhost:" + PORT + server.graphqlPath);
 });
