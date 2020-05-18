@@ -14,7 +14,7 @@ const server = new ApolloServer({
 // @ts-ignore
 server.applyMiddleware({ app });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () =>
   console.log(
