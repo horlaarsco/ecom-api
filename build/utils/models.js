@@ -93,9 +93,7 @@ exports.resolvers = {
                 var user;
                 return __generator(this, function (_b) {
                     switch (_b.label) {
-                        case 0:
-                            console.log(Date.now());
-                            return [4 /*yield*/, model_1.default.create(__assign(__assign({}, input), { createdAt: 277272, updatedAt: 2882 }))];
+                        case 0: return [4 /*yield*/, model_1.default.create(__assign(__assign({}, input), { createdAt: 277272, updatedAt: 2882 }))];
                         case 1:
                             user = _b.sent();
                             return [2 /*return*/, user];
@@ -136,4 +134,3 @@ exports.resolvers = {
     },
 };
 var templateObject_1;
-//# sourceMappingURL=models.js.map
