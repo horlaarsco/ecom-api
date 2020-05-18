@@ -4,11 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon --exec  ts-node ./src/app.ts",
-    "start": "nodemon ./dist/app.js",
-    "prod": "npm run build && npm run start",
-    "heroku-postbuild": "node ./dist/app.js"
+    "start": "node ./dist/app.js"
   },
   "keywords": [],
   "author": "",
