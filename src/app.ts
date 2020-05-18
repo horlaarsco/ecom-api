@@ -12,7 +12,7 @@ const server = new ApolloServer({
 });
 
 // @ts-ignore
-// server.applyMiddleware({ app });
+server.applyMiddleware({ app });
 
 const PORT = process.env.PORT;
 
