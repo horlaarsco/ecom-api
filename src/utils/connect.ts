@@ -16,6 +16,4 @@ mongoose
     console.log("Error connecting to database: ", error);
   });
 
-let db = mongoose.connection;
-
-export default db;
+export let db = mongoose.connection;
