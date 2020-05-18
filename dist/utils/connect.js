@@ -20,3 +20,4 @@ mongoose_1.default
 });
 var db = mongoose_1.default.connection;
 exports.default = db;
+//# sourceMappingURL=connect.js.map

@@ -8,19 +8,21 @@
     "dev": "node ts-node ./src/app.ts",
     "start": "node ./dist/app.js",
     "prod": "npm run build && npm run start",
-    "heroku-postbuild": "node ./build/app.js"
+    "heroku-postbuild": "node ./dist/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.13.1",
+    "apollo-server-express": "^2.13.1",
     "dotenv": "^8.2.0",
+    "graphql": "^15.0.0",
     "graphql-date": "^1.0.3",
     "mongoose": "^5.9.14",
+    "nodemon": "^1.19.4",
     "ts-node": "^8.10.1",
-    "typescript": "^3.9.2",
-    "nodemon": "^1.19.4"
+    "typescript": "^3.9.2"
   },
   "engines": {
     "node": "13.5.0",
