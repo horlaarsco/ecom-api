@@ -2,10 +2,10 @@ import { ApolloServer } from "apollo-server";
 import { db, resolvers, typeDefs } from "./utils";
 
 const server = new ApolloServer({
+  introspection: true,
+  playground: true,
   typeDefs,
   resolvers,
-  playground: true,
-  introspection: true,
 });
 
 server.listen({ port: process.env.PORT }).then(({ url }) => {
