@@ -1,21 +1,14 @@
-import express from "express";
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer } from "apollo-server";
 import { db, resolvers, typeDefs } from "./utils";
 
-const app = express();
-
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
   introspection: true,
   playground: true,
+  typeDefs,
+  resolvers,
 });
 
-// @ts-ignore
-server.applyMiddleware({ app });
-
-const PORT = process.env.PORT;
-
-app.get("/", (req, res) => res.send("ola"));
-
-app.listen(PORT, () => console.log(`🚀 Server ready at http://localhost:`));
+server.listen({ port: process.env.PORT }).then(({ url }) => {
+  db.on;
+  console.log(`Server ready at ${url}`);
+});

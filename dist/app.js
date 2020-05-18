@@ -1,21 +1,16 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = __importDefault(require("express"));
-var apollo_server_express_1 = require("apollo-server-express");
+var apollo_server_1 = require("apollo-server");
 var utils_1 = require("./utils");
-var app = express_1.default();
-var server = new apollo_server_express_1.ApolloServer({
-    typeDefs: utils_1.typeDefs,
-    resolvers: utils_1.resolvers,
+var server = new apollo_server_1.ApolloServer({
     introspection: true,
     playground: true,
+    typeDefs: utils_1.typeDefs,
+    resolvers: utils_1.resolvers,
 });
-// @ts-ignore
-server.applyMiddleware({ app: app });
-var PORT = process.env.PORT;
-app.get("/", function (req, res) { return res.send("ola"); });
-app.listen(PORT, function () { return console.log("\uD83D\uDE80 Server ready at http://localhost:"); });
+server.listen({ port: process.env.PORT }).then(function (_a) {
+    var url = _a.url;
+    utils_1.db.on;
+    console.log("Server ready at " + url);
+});
 //# sourceMappingURL=app.js.map
