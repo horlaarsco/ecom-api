@@ -6,35 +6,35 @@ import slugify from "slugify";
 const UserSchema = new Schema({
   firstName: {
     type: String,
-    required: true,
-    maxlength: 100,
+    required: [true, "firstName is Required?"],
+    maxlength: [100, "Maximum Character?"],
   },
   lastName: {
     type: String,
-    required: true,
-    maxlength: 100,
+    required: [true, "lastName is Required?"],
+    maxlength: [100, "Maximum Character?"],
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "email is Required?"],
     unique: true,
-    maxlength: 100,
+    maxlength: [100, "Maximum Character?"],
     lowercase: true,
   },
   username: {
     type: String,
     unique: true,
-    required: true,
-    maxlength: 30,
+    required: [true, "username is Required?"],
+    maxlength: [100, "Maximum Character?"],
     lowercase: true,
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "password is Required?"],
   },
   role: {
     type: String,
-    required: true,
+    required: [true, "role is Required?"],
   },
   verified: {
     type: Boolean,
@@ -42,15 +42,15 @@ const UserSchema = new Schema({
   },
   createdAt: {
     type: String,
-    required: true,
+    required: [true, "createdAt is Required?"],
   },
   updatedAt: {
     type: String,
-    required: true,
+    required: [true, "updatedAt is Required?"],
   },
   slug: {
     type: String,
-    required: true,
+    required: [true, "Slug is Required?"],
   },
   tokens: [{ type: String }],
 });

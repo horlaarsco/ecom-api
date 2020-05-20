@@ -38,7 +38,20 @@ export const resolvers = {
   },
   Mutation: {
     addUser: async (_, { input }) => {
-      return addModel(User, input);
+      try {
+        const validation = User.validate(input);
+        if (validation.error) {
+          throw new Error(`${validation.error.message}`);
+        }
+        const model = await User.create(input);
+        return model;
+      } catch (error) {
+        if (error.code == 11000) {
+          throw new Error(`Duplicate`);
+        } else {
+          throw new Error(error);
+        }
+      }
     },
     editUser: async (_, { id, input }) => {
       return editUser(User, id, input);
