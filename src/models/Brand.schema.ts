@@ -5,6 +5,7 @@ const BrandSchema = new Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   description: {
     type: String,
@@ -13,6 +14,11 @@ const BrandSchema = new Schema({
   slug: {
     type: String,
     required: true,
+    unique: true,
+  },
+  images: {
+    type: String,
+    required: [true, "images is Required?"],
   },
 });
 

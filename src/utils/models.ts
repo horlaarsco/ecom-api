@@ -44,6 +44,8 @@ export const typeDefs = gql`
     updatedAt: String
     salePrice: Int!
     category: Category
+    sizes: [String!]
+    images: [String!]
   }
 
   input ProductInput {
@@ -55,6 +57,9 @@ export const typeDefs = gql`
     quantity: Int!
     salePrice: Int!
     category: Category
+    sizes: [String!]
+    images: [String!]
+    colors: [String!]
   }
 
   input UserInput {

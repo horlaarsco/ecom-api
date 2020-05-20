@@ -48,6 +48,10 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "updatedAt is Required?"],
   },
+  images: {
+    type: String,
+    required: [true, "images is Required?"],
+  },
   slug: {
     type: String,
     required: [true, "Slug is Required?"],

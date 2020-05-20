@@ -6,8 +6,8 @@ const url = process.env.MONGO;
 mongoose
   .connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
     useCreateIndex: true,
+    autoIndex: true,
   })
   .then(() => {
     return console.log(`Success fully  connected to database`);

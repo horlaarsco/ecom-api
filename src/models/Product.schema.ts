@@ -5,6 +5,7 @@ const ProductSchema = new Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
   },
   owner: {
     type: Types.ObjectId,
@@ -18,6 +19,7 @@ const ProductSchema = new Schema({
   slug: {
     type: String,
     required: true,
+    unique: true,
   },
   price: {
     type: Number,
@@ -31,6 +33,21 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
+  sizes: [
+    {
+      type: String,
+    },
+  ],
+  images: [
+    {
+      type: String,
+    },
+  ],
+  colors: [
+    {
+      type: String,
+    },
+  ],
   brand: {
     type: Types.ObjectId,
     ref: "Brand",
