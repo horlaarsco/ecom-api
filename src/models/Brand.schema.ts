@@ -16,10 +16,10 @@ const BrandSchema = new Schema({
     required: true,
     unique: true,
   },
-  images: {
-    type: String,
-    required: [true, "images is Required?"],
-  },
+  // images: {
+  //   type: String,
+  //   required: [true, "images is Required?"],
+  // },
 });
 
 BrandSchema.pre("validate", async function (next) {
