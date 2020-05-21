@@ -9,6 +9,7 @@ export const typeDefs = gql`
   enum Category {
     Male
     Female
+    Unisex
   }
   type User {
     id: ID
@@ -46,6 +47,7 @@ export const typeDefs = gql`
     category: Category
     sizes: [String!]
     images: [String!]
+    colors: [String!]
   }
 
   input ProductInput {
@@ -84,6 +86,12 @@ export const typeDefs = gql`
   input BrandInput {
     name: String!
     description: String!
+    image: String!
+  }
+
+  input LoginInput {
+    user: String!
+    password: String!
   }
 
   type Query {
@@ -91,7 +99,7 @@ export const typeDefs = gql`
     users: [User!]!
     brand(id: ID!): Brand!
     brands: [Brand!]!
-    product(id: ID!): Product!
+    product(slug: String!): Product!
     products: [Product!]!
   }
 
@@ -106,5 +114,6 @@ export const typeDefs = gql`
     addProduct(input: ProductInput): Product!
     editProduct(input: ProductInput, id: ID!): Product!
     deleteProduct(id: ID!): Product!
+    loginUser(input: LoginInput): User!
   }
 `;

@@ -68,7 +68,9 @@ const ProductSchema = new Schema({
 });
 
 ProductSchema.pre("validate", function (next) {
-  this.slug = slugify(this.name);
+  this.slug = slugify(this.name, {
+    lower: true,
+  });
   this.createdAt = JSON.stringify(Date.now());
   this.updatedAt = JSON.stringify(Date.now());
   next();

@@ -1,4 +1,6 @@
 import { Brand, Product, User } from "../models";
+import * as bcrypt from "bcrypt";
+
 import {
   addModel,
   deleteModel,
@@ -23,8 +25,8 @@ export const resolvers = {
         .populate({ path: "brand" });
       return products;
     },
-    product: async (_, { id }) => {
-      const product = await Product.findById(id)
+    product: async (_, { slug }) => {
+      const product = await Product.findOne({ slug: slug })
         .populate({ path: "owner" })
         .populate({ path: "brand" });
       return product;
@@ -96,6 +98,18 @@ export const resolvers = {
         .populate({ path: "brand" })
         .execPopulate();
       return model;
+    },
+    loginUser: async (_, { input }) => {
+      const user = await User.findOne({
+        $or: [{ username: input.user }, { email: input.user }],
+      });
+      if (!user) throw new Error("Incorrect Email or Username");
+      const check = await bcrypt.compare(input.password, user.password);
+      if (check) {
+        return user;
+      } else {
+        throw new Error("Incorrect Password");
+      }
     },
   },
 };

@@ -16,14 +16,14 @@ const BrandSchema = new Schema({
     required: true,
     unique: true,
   },
-  // images: {
-  //   type: String,
-  //   required: [true, "images is Required?"],
-  // },
+  image: {
+    type: String,
+    required: [true, "images is Required?"],
+  },
 });
 
-BrandSchema.pre("validate", async function (next) {
-  this.slug = await slugify(this.name, {
+BrandSchema.pre("validate", function (next) {
+  this.slug = slugify(this.name, {
     lower: true,
   });
   next();
