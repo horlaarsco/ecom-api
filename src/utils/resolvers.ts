@@ -23,19 +23,30 @@ export const resolvers = {
       const products = await Product.find()
         .populate({ path: "owner" })
         .populate({ path: "brand" });
+
       return products;
     },
     product: async (_, { slug }) => {
       const product = await Product.findOne({ slug: slug })
         .populate({ path: "owner" })
         .populate({ path: "brand" });
+
       return product;
     },
     brands: async () => {
       return readModels(Brand);
     },
-    brand: async (_, { id }) => {
-      return readModel(Brand, id);
+    brand: async (_, { slug }) => {
+      const brand = await Brand.findOne({ slug: slug }).populate({
+        path: "products",
+      });
+      return brand;
+    },
+    allProduct: async (_, { id }) => {
+      const products = await Product.find({ brand: id })
+        .populate({ path: "owner" })
+        .populate({ path: "brand" });
+      return products;
     },
   },
   Mutation: {

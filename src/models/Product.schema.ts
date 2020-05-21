@@ -1,5 +1,6 @@
 import { Schema, model, Types } from "mongoose";
 import slugify from "slugify";
+import { Brand } from "../models";
 
 const ProductSchema = new Schema({
   name: {
@@ -67,12 +68,15 @@ const ProductSchema = new Schema({
   },
 });
 
-ProductSchema.pre("validate", function (next) {
+ProductSchema.pre("validate", async function (next) {
   this.slug = slugify(this.name, {
     lower: true,
   });
   this.createdAt = JSON.stringify(Date.now());
   this.updatedAt = JSON.stringify(Date.now());
+  const brand = await Brand.findByIdAndUpdate(this.brand);
+  brand.products = [...brand.products, this._id];
+  brand.save();
   next();
 });
 

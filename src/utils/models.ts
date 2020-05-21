@@ -30,6 +30,8 @@ export const typeDefs = gql`
     name: String!
     description: String!
     slug: String
+    image: String!
+    products: [Product]
   }
 
   type Product {
@@ -97,10 +99,11 @@ export const typeDefs = gql`
   type Query {
     user(id: ID!): User!
     users: [User!]!
-    brand(id: ID!): Brand!
+    brand(slug: String!): Brand!
     brands: [Brand!]!
     product(slug: String!): Product!
     products: [Product!]!
+    allProduct(id: ID!): [Product!]
   }
 
   type Mutation {

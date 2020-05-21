@@ -20,6 +20,12 @@ const BrandSchema = new Schema({
     type: String,
     required: [true, "images is Required?"],
   },
+  products: [
+    {
+      type: Types.ObjectId,
+      ref: "Product",
+    },
+  ],
 });
 
 BrandSchema.pre("validate", function (next) {
