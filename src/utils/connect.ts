@@ -8,6 +8,7 @@ mongoose
     useNewUrlParser: true,
     useCreateIndex: true,
     autoIndex: true,
+    useFindAndModify: false,
   })
   .then(() => {
     return console.log(`Success fully  connected to database`);

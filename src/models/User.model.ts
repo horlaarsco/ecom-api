@@ -52,35 +52,30 @@ const UserSchema = new Schema({
   //   type: String,
   //   required: [true, "images is Required?"],
   // },
-  slug: {
-    type: String,
-    required: [true, "Slug is Required?"],
-  },
-  tokens: [{ type: String }],
+  token: { type: String },
 });
 
-UserSchema.pre("validate", async function (next) {
-  this.slug = await slugify(this.username, {
-    lower: true,
-  });
-  this.createdAt = JSON.stringify(Date.now());
-  this.updatedAt = JSON.stringify(Date.now());
-  next();
-});
+// UserSchema.static.fillothers = async function (username) {
+//   const user = this;
+//   const slug = await slugify(user.username, {
+//     lower: true,
+//   });
+//   user.slug = slug;
+//   await user.save();
+//   return slug;
+// };
 
-UserSchema.pre("save", async function (next) {
-  if (this.password) {
-    this.password = await bcrypt.hash(this.password, 8);
-  }
-  this.username = this.username.toLowerCase();
-  this.email = this.email.toLowerCase();
-  if (this.tokens.length < 0) {
-    this.tokens.push(
-      jwt.sign({ email: this.email, password: this.password }, process.env.JWT)
-    );
-  }
-  next();
-});
+// UserSchema.pre("save", async function (next) {
+//   if (this.password) {
+//     this.password = await bcrypt.hash(this.password, 8);
+//   }
+//   this.username = this.username.toLowerCase();
+//   this.email = this.email.toLowerCase();
+//   if (this.tokens.length === 0) {
+//     this.tokens.push(
+//       jwt.sign({ email: this.email, password: this.password }, process.env.JWT)
+//     );
+//   }
 
 const User = model("User", UserSchema);
 export default User;

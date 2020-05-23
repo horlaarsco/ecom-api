@@ -1,5 +1,6 @@
 import { Brand, Product, User } from "../models";
 import * as bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
 
 import {
   addModel,
@@ -10,6 +11,7 @@ import {
   editUser,
   editPassword,
 } from "../controller/Model";
+import slugify from "slugify";
 
 export const resolvers = {
   Query: {
@@ -52,10 +54,17 @@ export const resolvers = {
   Mutation: {
     addUser: async (_, { input }) => {
       try {
-        const validation = User.validate(input);
-        if (validation.error) {
-          throw new Error(`${validation.error.message}`);
-        }
+        const now = new Date();
+        input.createdAt = JSON.stringify(now);
+        input.updatedAt = JSON.stringify(now);
+        input.password = await bcrypt.hash(input.password, 8);
+        input.username = input.username.toLowerCase();
+        input.email = input.email.toLowerCase();
+        let token = jwt.sign(
+          { email: input.email, password: input.password },
+          process.env.JWT
+        );
+        input.token = token;
         const model = await User.create(input);
         return model;
       } catch (error) {
@@ -116,11 +125,28 @@ export const resolvers = {
       });
       if (!user) throw new Error("Incorrect Email or Username");
       const check = await bcrypt.compare(input.password, user.password);
+      console.log(check);
       if (check) {
+        let token = jwt.sign(
+          { email: input.email, password: input.password },
+          process.env.JWT
+        );
+        user.token = token;
+        user.save();
         return user;
       } else {
         throw new Error("Incorrect Password");
       }
+    },
+    logout: async (_, { id }) => {
+      const user = await User.findByIdAndUpdate(id);
+      user.token = "";
+      user.save();
+      return user;
+    },
+    verifylogin: async (_, { id }) => {
+      const user = await User.findByIdAndUpdate(id);
+      return user;
     },
   },
 };

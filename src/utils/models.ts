@@ -2,8 +2,9 @@ import { gql } from "apollo-server";
 
 export const typeDefs = gql`
   enum Role {
-    Admin
-    User
+    admin
+    seller
+    user
   }
 
   enum Category {
@@ -22,7 +23,7 @@ export const typeDefs = gql`
     createdAt: String
     updatedAt: String
     role: Role
-    tokens: [String]
+    token: String
   }
 
   type Brand {
@@ -118,5 +119,7 @@ export const typeDefs = gql`
     editProduct(input: ProductInput, id: ID!): Product!
     deleteProduct(id: ID!): Product!
     loginUser(input: LoginInput): User!
+    logout(id: ID): User!
+    verifylogin(id: ID): User!
   }
 `;
