@@ -28,6 +28,7 @@ const BrandSchema = new Schema({
   ],
 });
 
+// sw
 BrandSchema.pre("validate", function (next) {
   this.slug = slugify(this.name, {
     lower: true,
