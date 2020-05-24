@@ -1,4 +1,4 @@
-import { Brand, Product, User } from "../models";
+import { Brand, Product, User, Order } from "../models";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
@@ -19,7 +19,11 @@ export const resolvers = {
       return readModels(User);
     },
     user: async (_, { id }) => {
-      return readModel(User, id);
+      const user = await User.findById(id).populate({
+        path: "orders",
+      });
+      console.log(user);
+      return user;
     },
     products: async () => {
       const products = await Product.find()
@@ -60,6 +64,7 @@ export const resolvers = {
         input.password = await bcrypt.hash(input.password, 8);
         input.username = input.username.toLowerCase();
         input.email = input.email.toLowerCase();
+        input.orders = [];
         let token = jwt.sign(
           { email: input.email, password: input.password },
           process.env.JWT
@@ -145,8 +150,17 @@ export const resolvers = {
       return user;
     },
     verifylogin: async (_, { id }) => {
-      const user = await User.findByIdAndUpdate(id);
+      const user = await User.findByIdAndUpdate(id).populate({
+        path: "orders",
+      });
       return user;
+    },
+    addOrder: async (_, { input }) => {
+      const order = await Order.create(input);
+      const user = await User.findByIdAndUpdate(input.owner);
+      user.orders = [...user.orders, order.id];
+      user.save();
+      return order;
     },
   },
 };

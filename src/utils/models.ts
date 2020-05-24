@@ -24,6 +24,22 @@ export const typeDefs = gql`
     updatedAt: String
     role: Role
     token: String
+    orders: [Order]
+  }
+
+  type Order {
+    id: ID
+    owner: ID
+    firstName: String!
+    lastName: String!
+    address: String!
+    address2: String!
+    city: String
+    number: String!
+    postCode: Int
+    createdAt: String
+    updatedAt: String
+    products: [String!]
   }
 
   type Brand {
@@ -77,6 +93,18 @@ export const typeDefs = gql`
     role: String!
   }
 
+  input OrderInput {
+    owner: ID
+    firstName: String!
+    lastName: String!
+    address: String!
+    address2: String
+    city: String
+    number: String!
+    products: [String!]
+    postCode: Int
+  }
+
   input EditUserInput {
     firstName: String!
     lastName: String!
@@ -121,5 +149,6 @@ export const typeDefs = gql`
     loginUser(input: LoginInput): User!
     logout(id: ID): User!
     verifylogin(id: ID): User!
+    addOrder(input: OrderInput): Order
   }
 `;

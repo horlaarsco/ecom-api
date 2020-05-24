@@ -48,6 +48,12 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "updatedAt is Required?"],
   },
+  orders: [
+    {
+      type: Types.ObjectId,
+      ref: "Order",
+    },
+  ],
   // images: {
   //   type: String,
   //   required: [true, "images is Required?"],
